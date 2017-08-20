@@ -6,9 +6,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        user: {
-            id: 'sdfkjksdf'
-        } 
+        user: null
     },
     mutations: {
         setUser (state, payload) {
@@ -23,7 +21,7 @@ export const store = new Vuex.Store({
                         const newUser = {
                             id: user.uid
                         }
-                        commit(setUser, newUser)
+                        commit('setUser', newUser)
                     }
                 )
                 .catch(
@@ -39,7 +37,7 @@ export const store = new Vuex.Store({
                         const existingUser = {
                             id: user.uid
                         }
-                        commit(setUser, existingUser)
+                        commit('setUser', existingUser)
                     }
                 )
                 .catch(
@@ -47,6 +45,11 @@ export const store = new Vuex.Store({
                         console.log(error)
                     }
                 )
+        }
+    },
+    getters: {
+        user (state) {
+            return state.user
         }
     }
 })

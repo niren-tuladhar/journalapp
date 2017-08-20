@@ -3,7 +3,7 @@
 <template>
     <div class="row">
         <div class="col-md-6">
-            <h3 style="text-align: left; margin-bottom: 50px">Sign Up</h3>
+            <h3 style="text-align: left; margin-bottom: 50px">Login</h3>
             <form @submit.prevent="onLogin">
                 <div class="form-group" style="text-align: left">
                     <label for="exampleInputEmail1">Email address</label>
@@ -27,9 +27,20 @@ export default {
             password: ""
         }
     },
+    computed: {
+        user() {
+            return this.$store.getters.user
+        }
+    },
+    watch: {
+        user(value) {
+            if (value !== null && value !== undefined) {
+                this.$router.push('/')
+            }
+        }
+    },
     methods: {
         onLogin() {
-            console.log("hello");
             this.$store.dispatch('loginUser', {email: this.email, password: this.password});
         }
     }
